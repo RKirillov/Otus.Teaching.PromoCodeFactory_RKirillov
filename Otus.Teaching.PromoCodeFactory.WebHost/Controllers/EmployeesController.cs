@@ -22,12 +22,12 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         }
         
         [HttpGet]
-        public async Task<List<EmployeeItemResponseModel>> GetEmployeesAsync()
+        public async Task<List<EmployeeShortResponse>> GetEmployeesAsync()
         {
             var employees = await _employeeRepository.GetAllAsync();
 
             var employeesModelList = employees.Select(x => 
-                new EmployeeItemResponseModel()
+                new EmployeeShortResponse()
                     {
                         Id = x.Id,
                         Email = x.Email,
@@ -38,9 +38,12 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         }
         
         [HttpGet("{id:guid}")]
-        public async Task<EmployeeResponse> GetEmployeeByIdAsync(Guid id)
+        public async Task<ActionResult<EmployeeResponse>> GetEmployeeByIdAsync(Guid id)
         {
             var employee = await _employeeRepository.GetByIdAsync(id);
+
+            if (employee == null)
+                return NotFound();
 
             var employeeModel = new EmployeeResponse()
             {

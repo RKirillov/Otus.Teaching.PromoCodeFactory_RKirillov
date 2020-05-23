@@ -2,7 +2,7 @@
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Models
 {
-    public class EmployeeItemResponseModel
+    public class EmployeeShortResponse
     {
         public Guid Id { get; set; }
         

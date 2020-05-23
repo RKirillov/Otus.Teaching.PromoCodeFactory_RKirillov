@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
 {
@@ -8,10 +12,10 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         : ControllerBase
     {
         [HttpGet]
-        public IActionResult GetPreferences()
+        public Task<ActionResult<List<PreferenceResponse>>> GetPreferencesAsync()
         {
             //TODO: Получение списка предпочтений
-            return Ok();
+            throw new NotImplementedException();
         }
     }
 }

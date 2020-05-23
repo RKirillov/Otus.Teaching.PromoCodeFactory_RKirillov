@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
 {
@@ -8,17 +12,17 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         : ControllerBase
     {
         [HttpGet]
-        public IActionResult GetPromocodes()
+        public Task<ActionResult<List<PromoCodeShortResponse>>> GetPromocodesAsync()
         {
             //TODO: Получить все промокоды, включая их предпочтения 
-            return Ok();
+            throw new NotImplementedException();
         }
         
         [HttpPost]
-        public IActionResult GivePromocodesToCustomersWithPreference()
+        public Task<IActionResult> GivePromocodesToCustomersWithPreferenceAsync()
         {
             //TODO: Создать промокод и выдать его клиентам с указанным предпочтением,
-            return Ok();
+            throw new NotImplementedException();
         }
     }
 }
