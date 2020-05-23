@@ -6,6 +6,9 @@ using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
 {
+    /// <summary>
+    /// Клиенты
+    /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class CustomersController

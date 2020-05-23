@@ -9,6 +9,9 @@ using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
 {
+    /// <summary>
+    /// Сотрудинки
+    /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class EmployeesController
@@ -49,11 +52,11 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
             {
                 Id = employee.Id,
                 Email = employee.Email,
-                Roles = employee.Roles.Select(x => new RoleItemResponse()
+                Role = new RoleItemResponse()
                 {
-                    Name = x.Name,
-                    Description = x.Description
-                }).ToList(),
+                    Name = employee.Role.Name,
+                    Description = employee.Role.Description
+                },
                 FullName = employee.FullName,
                 AppliedPromocodesCount = employee.AppliedPromocodesCount
             };

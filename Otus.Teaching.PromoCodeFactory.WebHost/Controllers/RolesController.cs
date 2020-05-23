@@ -8,6 +8,9 @@ using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
 {
+    /// <summary>
+    /// Роли сотрудников
+    /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class RolesController
@@ -19,6 +22,10 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
             _rolesRepository = rolesRepository;
         }
         
+        /// <summary>
+        /// Получить все роли сотрудников
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IEnumerable<RoleItemResponse>> GetRolesAsync()
         {

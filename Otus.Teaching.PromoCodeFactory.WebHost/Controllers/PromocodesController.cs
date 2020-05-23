@@ -6,22 +6,33 @@ using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
 {
+    /// <summary>
+    /// Промокоды
+    /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class PromocodesController
         : ControllerBase
     {
+        /// <summary>
+        /// Получить все промокоды
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public Task<ActionResult<List<PromoCodeShortResponse>>> GetPromocodesAsync()
         {
-            //TODO: Получить все промокоды, включая их предпочтения 
+            //TODO: Получить все промокоды 
             throw new NotImplementedException();
         }
         
+        /// <summary>
+        /// Создать промокод и выдать его клиентам с указанным предпочтением
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
-        public Task<IActionResult> GivePromocodesToCustomersWithPreferenceAsync()
+        public Task<IActionResult> GivePromoCodesToCustomersWithPreferenceAsync(GivePromoCodeRequest request)
         {
-            //TODO: Создать промокод и выдать его клиентам с указанным предпочтением,
+            //TODO: Создать промокод и выдать его клиентам с указанным предпочтением
             throw new NotImplementedException();
         }
     }
