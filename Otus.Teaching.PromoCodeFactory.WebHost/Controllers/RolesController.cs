@@ -23,7 +23,7 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         }
         
         /// <summary>
-        /// Получить все роли сотрудников
+        /// Получить все доступные роли сотрудников
         /// </summary>
         /// <returns></returns>
         [HttpGet]
