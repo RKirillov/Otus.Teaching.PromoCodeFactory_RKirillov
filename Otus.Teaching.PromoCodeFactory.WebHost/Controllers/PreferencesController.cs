@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Otus.Teaching.PromoCodeFactory.Core.Abstractions.Repositories;
+using Otus.Teaching.PromoCodeFactory.Core.Domain.PromoCodeManagement;
 using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
@@ -14,11 +17,25 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
     public class PreferencesController
         : ControllerBase
     {
-        [HttpGet]
-        public Task<ActionResult<List<PreferenceResponse>>> GetPreferencesAsync()
+        private readonly IRepository<Preference> _preferencesRepository;
+
+        public PreferencesController(IRepository<Preference> preferencesRepository)
         {
-            //TODO: Получение списка предпочтений
-            throw new NotImplementedException();
+            _preferencesRepository = preferencesRepository;
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult<List<PreferenceResponse>>> GetPreferencesAsync()
+        {
+            var preferences = await _preferencesRepository.GetAllAsync();
+
+            var response = preferences.Select(x => new PreferenceResponse()
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToList();
+
+            return Ok(response);
         }
     }
 }
