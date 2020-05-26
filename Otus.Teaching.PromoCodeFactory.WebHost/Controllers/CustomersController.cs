@@ -57,14 +57,8 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         public async Task<ActionResult<CustomerResponse>> CreateCustomerAsync(CreateOrEditCustomerRequest request)
         {
             //Получаем предпочтения из бд и сохраняем большой объект
-            var preferences = new List<Preference>();
-            foreach (var preferenceId in request.PreferencesId)
-            {
-                var preference = await _preferenceRepository.GetByIdAsync(preferenceId);
-                if (preference == null)
-                    return BadRequest();
-                preferences.Add(preference);
-            }
+            var preferences = await _preferenceRepository
+                .GetRangeByIdsAsync(request.PreferenceIds);
 
             var customer = new Customer()
             {
@@ -72,15 +66,12 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
                 FirstName = request.FirstName,
                 LastName = request.LastName,
             };
-
-            var customerPreferences = preferences.Select(x => new CustomerPreference()
+            customer.Preferences = preferences.Select(x => new CustomerPreference()
             {
                 Customer = customer,
                 Preference = x
             }).ToList();
-
-            customer.Preferences = customerPreferences;
-
+            
             await _customerRepository.AddAsync(customer);
 
             return CreatedAtAction(nameof(GetCustomerAsync), new {id = customer.Id}, null);
@@ -89,32 +80,23 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> EditCustomersAsync(Guid id, CreateOrEditCustomerRequest request)
         {
-            //Получаем предпочтения из бд и сохраняем большой объект
-            var preferences = new List<Preference>();
-            foreach (var preferenceId in request.PreferencesId)
-            {
-                var preference = await _preferenceRepository.GetByIdAsync(preferenceId);
-                if (preference == null)
-                    return BadRequest();
-                preferences.Add(preference);
-            }
-
-            var customer = new Customer()
-            {
-                Id = id,
-                Email = request.Email,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-            };
-
-            var customerPreferences = preferences.Select(x => new CustomerPreference()
+            var customer = await _customerRepository.GetByIdAsync(id);
+            
+            if (customer == null)
+                return NotFound();
+            
+            var preferences = await _preferenceRepository.GetRangeByIdsAsync(request.PreferenceIds);
+            
+            customer.Email = request.Email;
+            customer.FirstName = request.FirstName;
+            customer.LastName = request.LastName;
+            customer.Preferences.Clear();
+            customer.Preferences = preferences.Select(x => new CustomerPreference()
             {
                 Customer = customer,
                 Preference = x
             }).ToList();
 
-            customer.Preferences = customerPreferences;
-            
             await _customerRepository.UpdateAsync(customer);
 
             return NoContent();

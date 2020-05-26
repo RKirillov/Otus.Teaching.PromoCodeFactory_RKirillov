@@ -33,6 +33,12 @@ namespace Otus.Teaching.PromoCodeFactory.DataAccess.Repositories
             return entity;
         }
 
+        public async Task<IEnumerable<T>> GetRangeByIdsAsync(List<Guid> ids)
+        {
+            var entities = await _dataContext.Set<T>().Where(x => ids.Contains(x.Id)).ToListAsync();
+            return entities;
+        }
+
         public async Task AddAsync(T entity)
         {
             await _dataContext.Set<T>().AddAsync(entity);
@@ -42,7 +48,6 @@ namespace Otus.Teaching.PromoCodeFactory.DataAccess.Repositories
 
         public async Task UpdateAsync(T entity)
         {
-            _dataContext.Set<T>().Update(entity);
             await _dataContext.SaveChangesAsync();
         }
 
