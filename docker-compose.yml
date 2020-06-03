@@ -2,7 +2,7 @@ version: '3'
 services:
   #Api
   promocode-factory-api:
-    build: '/src'
+    build: src
     container_name: 'promocode-factory-api'
     restart: always
     ports:
