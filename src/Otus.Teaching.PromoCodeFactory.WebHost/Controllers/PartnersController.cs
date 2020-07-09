@@ -75,7 +75,7 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         }
         
         [HttpPost("{id}/limits")]
-        public async Task<ActionResult<List<PartnerResponse>>> SetPartnerPromoCodeLimitAsync(Guid id, SetPartnerPromoCodeLimitRequest request)
+        public async Task<IActionResult> SetPartnerPromoCodeLimitAsync(Guid id, SetPartnerPromoCodeLimitRequest request)
         {
             var partner = await _partnersRepository.GetByIdAsync(id);
 
@@ -121,7 +121,7 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         }
         
         [HttpPost("{id}/canceledLimits")]
-        public async Task<ActionResult<List<PartnerResponse>>> CancelPartnerPromoCodeLimitAsync(Guid id)
+        public async Task<IActionResult> CancelPartnerPromoCodeLimitAsync(Guid id)
         {
             var partner = await _partnersRepository.GetByIdAsync(id);
             
