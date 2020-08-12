@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.PromoCodeManagement;
-using Otus.Teaching.PromoCodeFactory.DataAccess;
 using Otus.Teaching.PromoCodeFactory.DataAccess.Data;
 using Otus.Teaching.PromoCodeFactory.DataAccess.Repositories;
 using Otus.Teaching.PromoCodeFactory.WebHost.Controllers;
 using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 using Xunit;
 
-namespace Otus.Teaching.PromoCodeFactory.IntegrationTests.WebHost.Controllers
+namespace Otus.Teaching.PromoCodeFactory.IntegrationTests.Bdd.WebHost.Controllers
 {
     public class CustomersControllerTests
     {

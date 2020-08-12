@@ -8,7 +8,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.PromoCodeFact
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.PromoCodeFactory.UnitTests", "Otus.Teaching.PromoCodeFactory.UnitTests\Otus.Teaching.PromoCodeFactory.UnitTests.csproj", "{28FDE1D4-2524-4494-9791-A903FD1B90D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.PromoCodeFactory.IntegrationTests", "Otus.Teaching.PromoCodeFactory.IntegrationTests\Otus.Teaching.PromoCodeFactory.IntegrationTests.csproj", "{127CEFFB-DA32-47C3-AE04-D4C0C3D6343A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.PromoCodeFactory.IntegrationTests.Simple", "Otus.Teaching.PromoCodeFactory.IntegrationTests.Simple\Otus.Teaching.PromoCodeFactory.IntegrationTests.Simple.csproj", "{127CEFFB-DA32-47C3-AE04-D4C0C3D6343A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.PromoCodeFactory.IntegrationTests.Api", "Otus.Teaching.PromoCodeFactory.IntegrationTests.Api\Otus.Teaching.PromoCodeFactory.IntegrationTests.Api.csproj", "{CDA2FEC1-80AE-48E5-AEE8-E26DB672080C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.PromoCodeFactory.IntegrationTests.Bdd", "Otus.Teaching.PromoCodeFactory.IntegrationTests.Bdd\Otus.Teaching.PromoCodeFactory.IntegrationTests.Bdd.csproj", "{A5938773-0234-40EA-A5AB-68A8650B4B09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +40,13 @@ Global
 		{127CEFFB-DA32-47C3-AE04-D4C0C3D6343A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{127CEFFB-DA32-47C3-AE04-D4C0C3D6343A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{127CEFFB-DA32-47C3-AE04-D4C0C3D6343A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDA2FEC1-80AE-48E5-AEE8-E26DB672080C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDA2FEC1-80AE-48E5-AEE8-E26DB672080C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDA2FEC1-80AE-48E5-AEE8-E26DB672080C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDA2FEC1-80AE-48E5-AEE8-E26DB672080C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5938773-0234-40EA-A5AB-68A8650B4B09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5938773-0234-40EA-A5AB-68A8650B4B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5938773-0234-40EA-A5AB-68A8650B4B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5938773-0234-40EA-A5AB-68A8650B4B09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

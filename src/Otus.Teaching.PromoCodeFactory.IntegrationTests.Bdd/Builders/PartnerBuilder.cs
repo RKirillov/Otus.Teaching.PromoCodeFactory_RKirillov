@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.PromoCodeManagement;
 
-namespace Otus.Teaching.PromoCodeFactory.IntegrationTests.Builders
+namespace Otus.Teaching.PromoCodeFactory.IntegrationTests.Bdd.Builders
 {
     public static class PartnerBuilder
     {
