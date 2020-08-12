@@ -1,4 +1,4 @@
-﻿﻿namespace Otus.Teaching.PromoCodeFactory.UnitTests.WebHost.Controllers.Partners
+﻿﻿﻿namespace Otus.Teaching.PromoCodeFactory.UnitTests.WebHost.Controllers.Partners
 {
     public class SetPartnerPromoCodeLimitAsyncTests
     {
