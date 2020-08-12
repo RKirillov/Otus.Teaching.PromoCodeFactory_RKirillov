@@ -9,6 +9,7 @@ using Moq;
 using Otus.Teaching.PromoCodeFactory.Core.Abstractions.Repositories;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.PromoCodeManagement;
 using Otus.Teaching.PromoCodeFactory.DataAccess.Repositories;
+using Otus.Teaching.PromoCodeFactory.Integration;
 using Otus.Teaching.PromoCodeFactory.WebHost.Controllers;
 using Xunit;
 
@@ -23,7 +24,7 @@ namespace Otus.Teaching.PromoCodeFactory.IntegrationTests.WebHost.Controllers
         public PartnersControllerTests(EfDatabaseFixture efDatabaseFixture)
         {
             _partnersRepository = new EfRepository<Partner>(efDatabaseFixture.DbContext);
-            _partnersController = new PartnersController(_partnersRepository);
+            _partnersController = new PartnersController(_partnersRepository, new NotificationGateway());
         }
         
         
@@ -32,8 +33,7 @@ namespace Otus.Teaching.PromoCodeFactory.IntegrationTests.WebHost.Controllers
         {
             // Arrange
             var partnerId = Guid.Parse("def47943-7aaf-44a1-ae21-05aa4948b165");
-            Partner partner = null;
-            
+
             // Act
             var result = await _partnersController.CancelPartnerPromoCodeLimitAsync(partnerId);
  

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Otus.Teaching.PromoCodeFactory.Core.Abstractions.Repositories;
+ using Otus.Teaching.PromoCodeFactory.Core.Abstractions.Gateways;
+ using Otus.Teaching.PromoCodeFactory.Core.Abstractions.Repositories;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.PromoCodeManagement;
 using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 
@@ -18,10 +19,12 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         : ControllerBase
     {
         private readonly IRepository<Partner> _partnersRepository;
+        private readonly INotificationGateway _notificationGateway;
 
-        public PartnersController(IRepository<Partner> partnersRepository)
+        public PartnersController(IRepository<Partner> partnersRepository, INotificationGateway notificationGateway)
         {
             _partnersRepository = partnersRepository;
+            _notificationGateway = notificationGateway;
         }
 
         [HttpGet]
@@ -117,6 +120,9 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
 
             await _partnersRepository.UpdateAsync(partner);
             
+            await _notificationGateway
+                .SendNotificationToPartnerAsync(partner.Id, "Вам установлен лимит на отправку промокодов...");
+            
             return CreatedAtAction(nameof(GetPartnerLimitAsync), new {id = partner.Id, limitId = newLimit.Id}, null);
         }
         
@@ -143,6 +149,10 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
 
             await _partnersRepository.UpdateAsync(partner);
 
+            //Отправляем уведомление
+            await _notificationGateway
+                .SendNotificationToPartnerAsync(partner.Id, "Ваш лимит на отправку промокодов отменен...");
+            
             return NoContent();
         }
     }

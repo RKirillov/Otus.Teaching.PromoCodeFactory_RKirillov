@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Otus.Teaching.PromoCodeFactory.Integration\Otus.Teaching.PromoCodeFactory.Integration.csproj" />
       <ProjectReference Include="..\Otus.Teaching.PromoCodeFactory.WebHost\Otus.Teaching.PromoCodeFactory.WebHost.csproj" />
     </ItemGroup>
 
