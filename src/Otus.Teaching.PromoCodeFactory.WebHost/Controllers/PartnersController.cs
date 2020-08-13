@@ -53,6 +53,32 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
             return Ok(response);
         }
         
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<PartnerResponse>>> GetPartnersAsync(Guid id)
+        {
+            var partner = await _partnersRepository.GetByIdAsync(id);
+
+            var response = new PartnerResponse()
+            {
+                Id = partner.Id,
+                Name = partner.Name,
+                NumberIssuedPromoCodes = partner.NumberIssuedPromoCodes,
+                IsActive = true,
+                PartnerLimits = partner.PartnerLimits
+                    .Select(y => new PartnerPromoCodeLimitResponse()
+                    {
+                        Id = y.Id,
+                        PartnerId = y.PartnerId,
+                        Limit = y.Limit,
+                        CreateDate = y.CreateDate.ToString("dd.MM.yyyy hh:mm:ss"),
+                        EndDate = y.EndDate.ToString("dd.MM.yyyy hh:mm:ss"),
+                        CancelDate = y.CancelDate?.ToString("dd.MM.yyyy hh:mm:ss"),
+                    }).ToList()
+            };
+
+            return Ok(response);
+        }
+        
         [HttpGet("{id}/limits/{limitId}")]
         public async Task<ActionResult<PartnerPromoCodeLimit>> GetPartnerLimitAsync(Guid id, Guid limitId)
         {
