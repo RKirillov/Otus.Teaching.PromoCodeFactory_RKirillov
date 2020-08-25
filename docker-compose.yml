@@ -1,22 +1,64 @@
 version: '3'
 services:
-  #Api
-  promocode-factory-api:
-    build: src
-    container_name: 'promocode-factory-api'
+  #Administration Api
+  promocode-factory-administration-api:
+    build: src/Otus.Teaching.Pcf.Administration/
+    container_name: 'promocode-factory-administration-api'
     restart: always
     ports:
       - "8091:80"
     environment:
-      - "ConnectionStrings:PromoCodeFactoryDb=Host=promocode-factory-db;Database=promocode_factory_db;Username=postgres;Password=docker"          
+      - "ConnectionStrings:PromocodeFactoryAdministrationDb=Host=promocode-factory-administration-db;Database=promocode_factory_administration_db;Username=postgres;Password=docker"          
     depends_on: 
-      - promocode-factory-db
-  #Db
-  promocode-factory-db:
+      - promocode-factory-administration-db
+  #Administration Db
+  promocode-factory-administration-db:
     image: "postgres:9.6.17"
-    container_name: 'promocode-factory-db'
+    container_name: 'promocode-factory-administration-db'
     restart: always 
     ports:
       - 5433:5432
+    environment: 
+      - POSTGRES_PASSWORD=docker
+
+  #ReceivingFromPartner Api
+  promocode-factory-receiving-from-partner-api:
+    build: src/Otus.Teaching.Pcf.ReceivingFromPartner/
+    container_name: 'promocode-factory-receiving-from-partner-api'
+    restart: always
+    ports:
+      - "8092:80"
+    environment:
+      - "ConnectionStrings:PromocodeFactoryReceivingFromPartnerDb=Host=promocode-factory-receivingFromPartner-db;Database=promocode_factory_receivingFromPartner_db;Username=postgres;Password=docker"          
+    depends_on: 
+      - promocode-factory-receiving-from-partner-db
+  #ReceivingFromPartner Db
+  promocode-factory-receiving-from-partner-db:
+    image: "postgres:9.6.17"
+    container_name: 'promocode-factory-receiving-from-partner-db'
+    restart: always 
+    ports:
+      - 5434:5432
+    environment: 
+      - POSTGRES_PASSWORD=docker
+  
+  #GivingToCustomer Api
+  promocode-factory-giving-to-customer-api:
+    build: src/Otus.Teaching.Pcf.GivingToCustomer/
+    container_name: 'promocode-factory-giving-to-customer-api'
+    restart: always
+    ports:
+      - "8093:80"
+    environment:
+      - "ConnectionStrings:PromocodeFactoryGivingToCustomerDb=Host=promocode-factory-givingToCustomer-db;Database=promocode_factory_givingToCustomer_db;Username=postgres;Password=docker"          
+    depends_on: 
+      - promocode-factory-giving-to-customer-db
+  #GivingToCustomer Db
+  promocode-factory-giving-to-customer-db:
+    image: "postgres:9.6.17"
+    container_name: 'promocode-factory-giving-to-customer-db'
+    restart: always 
+    ports:
+      - 5435:5432
     environment: 
       - POSTGRES_PASSWORD=docker
