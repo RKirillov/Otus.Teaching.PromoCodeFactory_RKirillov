@@ -23,14 +23,14 @@ namespace Otus.Teaching.PromoCodeFactory.IntegrationTests.Api.WebHost.Controller
 {
 
     public class CustomersControllerTests
-        : IClassFixture<WebApplicationFactory<Startup>> // Postgres
-        //: IClassFixture<TestWebApplicationFactory<Startup>> // SqlLite
+        //: IClassFixture<WebApplicationFactory<Startup>> // Postgres
+        : IClassFixture<TestWebApplicationFactory<Startup>> // SqlLite
     {
         private readonly WebApplicationFactory<Startup> _factory;
         
         public CustomersControllerTests(
-            WebApplicationFactory<Startup> factory  // Postgres
-            //TestWebApplicationFactory<Startup> factory // SqlLite
+            //WebApplicationFactory<Startup> factory  // Postgres
+            TestWebApplicationFactory<Startup> factory // SqlLite
             )
         {
             _factory = factory;
@@ -92,8 +92,7 @@ namespace Otus.Teaching.PromoCodeFactory.IntegrationTests.Api.WebHost.Controller
                     services.AddScoped<INotificationGateway, FakeNotificationGateway>();
                 });
             }).CreateClient();
-            
-            
+
             var expected = new CustomerResponse()
             {
                 Id = Guid.Parse("a6c8c6b1-4349-45b0-ab31-244740aaf0f0"),
