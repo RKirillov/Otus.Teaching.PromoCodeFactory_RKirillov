@@ -34,8 +34,8 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models
                 {
                     Id = x.PromoCode.Id,
                     Code = x.PromoCode.Code,
-                    BeginDate = x.PromoCode.BeginDate.ToShortDateString(),
-                    EndDate = x.PromoCode.EndDate.ToShortDateString(),
+                    BeginDate = x.PromoCode.BeginDate.ToString("yyyy-MM-dd"),
+                    EndDate = x.PromoCode.EndDate.ToString("yyyy-MM-dd"),
                     PartnerId = x.PromoCode.PartnerId,
                     ServiceInfo = x.PromoCode.ServiceInfo
                 }).ToList();
