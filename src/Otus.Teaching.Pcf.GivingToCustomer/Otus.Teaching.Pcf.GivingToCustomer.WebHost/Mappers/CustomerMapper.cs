@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain.PromoCodeManagement;
+using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain;
 using Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models;
 
 namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Mappers

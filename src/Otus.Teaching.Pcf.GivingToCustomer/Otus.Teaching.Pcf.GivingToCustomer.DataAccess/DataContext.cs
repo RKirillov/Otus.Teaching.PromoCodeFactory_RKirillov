@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain.PromoCodeManagement;
+using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain;
 using Otus.Teaching.Pcf.GivingToCustomer.DataAccess.Data;
 
 namespace Otus.Teaching.Pcf.GivingToCustomer.DataAccess

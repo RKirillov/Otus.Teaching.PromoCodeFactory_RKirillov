@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models
+namespace Otus.Teaching.Pcf.ReceivingFromPartner.WebHost.Models
 {
     public class PromoCodeShortResponse
     {
@@ -13,7 +13,9 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models
         public string BeginDate { get; set; }
 
         public string EndDate { get; set; }
-
+        
         public Guid PartnerId { get; set; }
+
+        public string PartnerName { get; set; }
     }
 }

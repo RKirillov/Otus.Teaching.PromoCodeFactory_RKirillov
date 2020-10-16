@@ -2,27 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
- using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain.PromoCodeManagement;
- using Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models;
+using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain;
+using Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models;
 
  namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Mappers
 {
     public class PromoCodeMapper
     {
-        public static PromoCode MapGromModel(GivePromoCodeRequest request, Preference preference, IEnumerable<Customer> customers) {
+        public static PromoCode MapFromModel(GivePromoCodeRequest request, Preference preference, IEnumerable<Customer> customers) {
 
             var promocode = new PromoCode();
-            promocode.Id = Guid.NewGuid();
+            promocode.Id = request.PromoCodeId;
             
-            promocode.PartnerName = request.PartnerName;
+            promocode.PartnerId = request.PartnerId;
             promocode.Code = request.PromoCode;
             promocode.ServiceInfo = request.ServiceInfo;
            
-            promocode.BeginDate = DateTime.Now;
-            promocode.EndDate = DateTime.Now.AddDays(30);
+            promocode.BeginDate = DateTime.Parse(request.BeginDate);
+            promocode.EndDate = DateTime.Parse(request.EndDate);
 
             promocode.Preference = preference;
             promocode.PreferenceId = preference.Id;
+
+            promocode.PartnerManagerId = request.PartnerManagerId;
 
             promocode.Customers = new List<PromoCodeCustomer>();
 

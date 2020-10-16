@@ -1,8 +1,6 @@
-﻿﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
-namespace Otus.Teaching.Pcf.GivingToCustomer.Core.Domain.PromoCodeManagement
+namespace Otus.Teaching.Pcf.GivingToCustomer.Core.Domain
 {
     public class PromoCodeCustomer : BaseEntity
     {

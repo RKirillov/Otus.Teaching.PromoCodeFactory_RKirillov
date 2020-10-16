@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Otus.Teaching.Pcf.GivingToCustomer.Core.Abstractions.Repositories;
-using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain.PromoCodeManagement;
+using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain;
 using Otus.Teaching.Pcf.GivingToCustomer.WebHost.Mappers;
 using Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models;
 

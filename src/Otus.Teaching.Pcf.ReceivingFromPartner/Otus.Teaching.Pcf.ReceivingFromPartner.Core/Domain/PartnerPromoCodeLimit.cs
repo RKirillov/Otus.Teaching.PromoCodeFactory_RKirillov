@@ -2,7 +2,8 @@
 
 namespace Otus.Teaching.Pcf.ReceivingFromPartner.Core.Domain
 {
-    public class PartnerPromoCodeLimit
+    public class 
+        PartnerPromoCodeLimit
     {
         public Guid Id { get; set; }
 

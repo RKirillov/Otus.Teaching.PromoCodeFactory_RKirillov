@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Otus.Teaching.Pcf.GivingToCustomer.Core.Domain.PromoCodeManagement
+namespace Otus.Teaching.Pcf.GivingToCustomer.Core.Domain
 {
     public class CustomerPreference
     {

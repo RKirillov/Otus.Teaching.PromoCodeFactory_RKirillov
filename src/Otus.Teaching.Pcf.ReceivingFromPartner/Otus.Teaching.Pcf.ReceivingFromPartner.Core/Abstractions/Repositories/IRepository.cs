@@ -8,7 +8,6 @@ using Otus.Teaching.Pcf.ReceivingFromPartner.Core.Domain;
 namespace Otus.Teaching.Pcf.ReceivingFromPartner.Core.Abstractions.Repositories
 {
     public interface IRepository<T>
-        where T: BaseEntity
     {
         Task<IEnumerable<T>> GetAllAsync();
         

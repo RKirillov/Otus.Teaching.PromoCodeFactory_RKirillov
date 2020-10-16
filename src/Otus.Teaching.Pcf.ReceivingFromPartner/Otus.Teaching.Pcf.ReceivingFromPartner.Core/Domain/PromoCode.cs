@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Otus.Teaching.Pcf.GivingToCustomer.Core.Domain.PromoCodeManagement
+namespace Otus.Teaching.Pcf.ReceivingFromPartner.Core.Domain
 {
     public class PromoCode
         : BaseEntity
@@ -14,14 +14,14 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.Core.Domain.PromoCodeManagement
 
         public DateTime EndDate { get; set; }
 
-        public string PartnerName { get; set; }
+        public Guid PartnerId { get; set; }
 
+        public virtual Partner Partner { get; set; }
+        
         public Guid? PartnerManagerId { get; set; }
-
+        
         public virtual Preference Preference { get; set; }
 
         public Guid PreferenceId { get; set; }
-        
-        public virtual ICollection<PromoCodeCustomer> Customers { get; set; }
     }
 }

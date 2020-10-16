@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain.PromoCodeManagement;
+using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain;
 using Otus.Teaching.Pcf.GivingToCustomer.DataAccess.Repositories;
 using Otus.Teaching.Pcf.GivingToCustomer.WebHost.Controllers;
 using Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models;

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models
+namespace Otus.Teaching.Pcf.ReceivingFromPartner.Integration.Dto
 {
-    public class GivePromoCodeRequest
+    public class GivePromoCodeToCustomerDto
     {
         public string ServiceInfo { get; set; }
 

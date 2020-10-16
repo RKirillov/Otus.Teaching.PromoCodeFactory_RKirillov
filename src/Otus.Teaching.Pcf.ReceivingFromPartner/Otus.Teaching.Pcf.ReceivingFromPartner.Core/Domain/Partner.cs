@@ -13,5 +13,7 @@ namespace Otus.Teaching.Pcf.ReceivingFromPartner.Core.Domain
         public bool IsActive { get; set; }
 
         public virtual ICollection<PartnerPromoCodeLimit> PartnerLimits { get; set; }
+        
+        public virtual ICollection<PromoCode> PromoCodes { get; set; }
     }
 }

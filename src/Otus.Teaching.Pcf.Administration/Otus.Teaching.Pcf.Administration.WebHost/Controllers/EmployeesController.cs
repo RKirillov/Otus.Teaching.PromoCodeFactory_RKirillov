@@ -72,5 +72,25 @@ namespace Otus.Teaching.Pcf.Administration.WebHost.Controllers
 
             return employeeModel;
         }
+        
+        /// <summary>
+        /// Обновить количество выданных промокодов
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("{id:guid}/appliedPromocodesCount")]
+        public async Task<ActionResult<EmployeeResponse>> UpdateAppliedPromocodesCountAsync(Guid id,
+            UpdateAppliedPromocodesCountRequest request)
+        {
+            var employee = await _employeeRepository.GetByIdAsync(id);
+
+            if (employee == null)
+                return NotFound();
+
+            employee.AppliedPromocodesCount = request.AppliedPromocodesCount;
+
+            await _employeeRepository.UpdateAsync(employee);
+
+            return Ok();
+        }
     }
 }

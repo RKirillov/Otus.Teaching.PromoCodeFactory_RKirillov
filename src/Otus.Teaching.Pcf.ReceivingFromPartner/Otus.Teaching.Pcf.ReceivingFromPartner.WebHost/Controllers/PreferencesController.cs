@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Otus.Teaching.Pcf.GivingToCustomer.Core.Abstractions.Repositories;
-using Otus.Teaching.Pcf.GivingToCustomer.Core.Domain;
-using Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models;
+using Otus.Teaching.Pcf.ReceivingFromPartner.Core.Abstractions.Repositories;
+using Otus.Teaching.Pcf.ReceivingFromPartner.Core.Domain;
+using Otus.Teaching.Pcf.ReceivingFromPartner.WebHost.Models;
 
-namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Controllers
+namespace Otus.Teaching.Pcf.ReceivingFromPartner.WebHost.Controllers
 {
     /// <summary>
     /// Предпочтения клиентов

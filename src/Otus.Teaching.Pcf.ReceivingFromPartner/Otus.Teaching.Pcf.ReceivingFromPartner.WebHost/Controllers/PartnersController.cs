@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
  using Otus.Teaching.Pcf.ReceivingFromPartner.Core.Abstractions.Gateways;
  using Otus.Teaching.Pcf.ReceivingFromPartner.Core.Abstractions.Repositories;
  using Otus.Teaching.Pcf.ReceivingFromPartner.Core.Domain;
+ using Otus.Teaching.Pcf.ReceivingFromPartner.WebHost.Mappers;
 
  namespace Otus.Teaching.Pcf.ReceivingFromPartner.WebHost.Controllers
 {
@@ -19,12 +20,19 @@ using Microsoft.AspNetCore.Mvc;
         : ControllerBase
     {
         private readonly IRepository<Partner> _partnersRepository;
+        private readonly IRepository<Preference> _preferencesRepository;
         private readonly INotificationGateway _notificationGateway;
+        private readonly IGivingPromoCodeToCustomerGateway _givingPromoCodeToCustomerGateway;
 
-        public PartnersController(IRepository<Partner> partnersRepository, INotificationGateway notificationGateway)
+        public PartnersController(IRepository<Partner> partnersRepository,
+            IRepository<Preference> preferencesRepository, 
+            INotificationGateway notificationGateway,
+            IGivingPromoCodeToCustomerGateway givingPromoCodeToCustomerGateway)
         {
             _partnersRepository = partnersRepository;
+            _preferencesRepository = preferencesRepository;
             _notificationGateway = notificationGateway;
+            _givingPromoCodeToCustomerGateway = givingPromoCodeToCustomerGateway;
         }
 
         [HttpGet]
@@ -58,6 +66,11 @@ using Microsoft.AspNetCore.Mvc;
         {
             var partner = await _partnersRepository.GetByIdAsync(id);
 
+            if (partner == null)
+            {
+                return NotFound();
+            }
+
             var response = new PartnerResponse()
             {
                 Id = partner.Id,
@@ -76,30 +89,6 @@ using Microsoft.AspNetCore.Mvc;
                     }).ToList()
             };
 
-            return Ok(response);
-        }
-        
-        [HttpGet("{id}/limits/{limitId}")]
-        public async Task<ActionResult<PartnerPromoCodeLimit>> GetPartnerLimitAsync(Guid id, Guid limitId)
-        {
-            var partner = await _partnersRepository.GetByIdAsync(id);
-
-            if (partner == null)
-                return NotFound();
-            
-            var limit = partner.PartnerLimits
-                .FirstOrDefault(x => x.Id == limitId);
-
-            var response = new PartnerPromoCodeLimitResponse()
-            {
-                Id = limit.Id,
-                PartnerId = limit.PartnerId,
-                Limit = limit.Limit,
-                CreateDate = limit.CreateDate.ToString("dd.MM.yyyy hh:mm:ss"),
-                EndDate = limit.EndDate.ToString("dd.MM.yyyy hh:mm:ss"),
-                CancelDate = limit.CancelDate?.ToString("dd.MM.yyyy hh:mm:ss"),
-            };
-            
             return Ok(response);
         }
         
@@ -152,6 +141,30 @@ using Microsoft.AspNetCore.Mvc;
             return CreatedAtAction(nameof(GetPartnerLimitAsync), new {id = partner.Id, limitId = newLimit.Id}, null);
         }
         
+        [HttpGet("{id}/limits/{limitId}")]
+        public async Task<ActionResult<PartnerPromoCodeLimit>> GetPartnerLimitAsync(Guid id, Guid limitId)
+        {
+            var partner = await _partnersRepository.GetByIdAsync(id);
+
+            if (partner == null)
+                return NotFound();
+            
+            var limit = partner.PartnerLimits
+                .FirstOrDefault(x => x.Id == limitId);
+
+            var response = new PartnerPromoCodeLimitResponse()
+            {
+                Id = limit.Id,
+                PartnerId = limit.PartnerId,
+                Limit = limit.Limit,
+                CreateDate = limit.CreateDate.ToString("dd.MM.yyyy hh:mm:ss"),
+                EndDate = limit.EndDate.ToString("dd.MM.yyyy hh:mm:ss"),
+                CancelDate = limit.CancelDate?.ToString("dd.MM.yyyy hh:mm:ss"),
+            };
+            
+            return Ok(response);
+        }
+
         [HttpPost("{id}/canceledLimits")]
         public async Task<IActionResult> CancelPartnerPromoCodeLimitAsync(Guid id)
         {
@@ -180,6 +193,106 @@ using Microsoft.AspNetCore.Mvc;
                 .SendNotificationToPartnerAsync(partner.Id, "Ваш лимит на отправку промокодов отменен...");
             
             return NoContent();
+        }
+        
+        /// <summary>
+        /// Получить промокод партнера по id
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("{id}/promocodes")]
+        public async Task<IActionResult> GetPartnerPromoCodesAsync(Guid id)
+        {
+            var partner = await _partnersRepository.GetByIdAsync(id);
+            
+            if (partner == null)
+            {
+                return NotFound("Партнер не найден");
+            }
+            
+            var response = partner.PromoCodes
+                .Select(x => new PromoCodeShortResponse()
+            {
+                Id = x.Id,
+                Code = x.Code,
+                BeginDate = x.BeginDate.ToString("yyyy-MM-dd"),
+                EndDate = x.EndDate.ToString("yyyy-MM-dd"),
+                PartnerName = x.Partner.Name,
+                PartnerId = x.PartnerId,
+                ServiceInfo = x.ServiceInfo
+            }).ToList();
+
+            return Ok(response);
+        }
+        
+        /// <summary>
+        /// Получить промокод партнера по id
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("{id}/promocodes/{promoCodeId}")]
+        public async Task<IActionResult> GetPartnerPromoCodeAsync(Guid id, Guid promoCodeId)
+        {
+            var partner = await _partnersRepository.GetByIdAsync(id);
+            
+            if (partner == null)
+            {
+                return NotFound("Партнер не найден");
+            }
+
+            var promoCode = partner.PromoCodes.FirstOrDefault(x => x.Id == promoCodeId);
+
+            if (promoCode == null)
+            {
+                return NotFound("Партнер не найден");
+            }
+            
+            var response =  new PromoCodeShortResponse()
+                {
+                    Id = promoCode.Id,
+                    Code = promoCode.Code,
+                    BeginDate = promoCode.BeginDate.ToString("yyyy-MM-dd"),
+                    EndDate = promoCode.EndDate.ToString("yyyy-MM-dd"),
+                    PartnerName = promoCode.Partner.Name,
+                    PartnerId = promoCode.PartnerId,
+                    ServiceInfo = promoCode.ServiceInfo
+                };
+
+            return Ok(response);
+        }
+        
+        /// <summary>
+        /// Создать промокод от партнера 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("{id}/promocodes")]
+        public async Task<IActionResult> ReceivePromoCodeFromPartnerWithPreferenceAsync(Guid id, ReceivingPromoCodeRequest request)
+        {
+            var partner = await _partnersRepository.GetByIdAsync(id);
+            
+            if (partner == null)
+            {
+                return BadRequest("Партнер не найден");
+            }
+            
+            //Получаем предпочтение по имени
+            var preference = await _preferencesRepository.GetFirstWhere(x => 
+                x.Name == request.Preference);
+
+            if (preference == null)
+            {
+                return BadRequest("Предпочтение не найдено");
+            }
+
+            PromoCode promoCode = PromoCodeMapper.MapFromModel(request, preference, partner);
+            partner.PromoCodes.Add(promoCode);
+
+            await _partnersRepository.UpdateAsync(partner);
+            
+            //То есть фактически обновили партнера, как единый агрегат
+            //TODO: Чтобы информация о том, что промокод был выдан парнером была отправлена
+            //в микросервис рассылки клиентам нужно либо вызвать его API, либо отправить событие в очередь
+            await _givingPromoCodeToCustomerGateway.GivePromoCodeToCustomer(promoCode);
+            
+            return CreatedAtAction(nameof(GetPartnerPromoCodeAsync), new {id = partner.Id, promoCodeId = promoCode.Id}, null);
         }
     }
 }
