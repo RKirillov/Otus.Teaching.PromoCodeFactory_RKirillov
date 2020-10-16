@@ -24,6 +24,10 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Controllers
             _preferencesRepository = preferencesRepository;
         }
         
+        /// <summary>
+        /// Получить список предпочтений
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<PreferenceResponse>>> GetPreferencesAsync()
         {

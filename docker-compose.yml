@@ -29,7 +29,9 @@ services:
     ports:
       - "8092:80"
     environment:
-      - "ConnectionStrings:PromocodeFactoryReceivingFromPartnerDb=Host=promocode-factory-receivingFromPartner-db;Database=promocode_factory_receivingFromPartner_db;Username=postgres;Password=docker"          
+      - "ConnectionStrings:PromocodeFactoryReceivingFromPartnerDb=Host=promocode-factory-receiving-from-partner-db;Database=promocode_factory_receiving_from_partner_db;Username=postgres;Password=docker"
+      - "IntegrationSettings:GivingToCustomerApiUrl=http://promocode-factory-giving-to-customer-api"    
+      - "IntegrationSettings:AdministrationApiUrl=http://promocode-factory-administration-api"       
     depends_on: 
       - promocode-factory-receiving-from-partner-db
   #ReceivingFromPartner Db
@@ -50,7 +52,7 @@ services:
     ports:
       - "8093:80"
     environment:
-      - "ConnectionStrings:PromocodeFactoryGivingToCustomerDb=Host=promocode-factory-givingToCustomer-db;Database=promocode_factory_givingToCustomer_db;Username=postgres;Password=docker"          
+      - "ConnectionStrings:PromocodeFactoryGivingToCustomerDb=Host=promocode-factory-giving-to-customer-db;Database=promocode_factory_giving_to_customer_db;Username=postgres;Password=docker"          
     depends_on: 
       - promocode-factory-giving-to-customer-db
   #GivingToCustomer Db

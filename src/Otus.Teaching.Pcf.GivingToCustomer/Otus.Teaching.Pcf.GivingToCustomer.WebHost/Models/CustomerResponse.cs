@@ -30,6 +30,15 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models
                 Id = x.PreferenceId,
                 Name = x.Preference.Name
             }).ToList();
+            PromoCodes = customer.PromoCodes.Select(x => new PromoCodeShortResponse()
+                {
+                    Id = x.PromoCode.Id,
+                    Code = x.PromoCode.Code,
+                    BeginDate = x.PromoCode.BeginDate.ToShortDateString(),
+                    EndDate = x.PromoCode.EndDate.ToShortDateString(),
+                    PartnerId = x.PromoCode.PartnerId,
+                    ServiceInfo = x.PromoCode.ServiceInfo
+                }).ToList();
         }
     }
 }

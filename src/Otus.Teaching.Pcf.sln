@@ -20,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.Pcf.GivingToC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.Pcf.GivingToCustomer.IntegrationTests", "Otus.Teaching.Pcf.GivingToCustomer\Otus.Teaching.Pcf.GivingToCustomer.IntegrationTests\Otus.Teaching.Pcf.GivingToCustomer.IntegrationTests.csproj", "{E321BB56-BCFC-40AF-8605-1422A9DEE016}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.Pcf.GivingToCustomer.UnitTests", "Otus.Teaching.Pcf.GivingToCustomer\Otus.Teaching.Pcf.GivingToCustomer.UnitTests\Otus.Teaching.Pcf.GivingToCustomer.UnitTests.csproj", "{104F65B5-E1E9-48F0-810C-34A38F316CC2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.Pcf.GivingToCustomer.WebHost", "Otus.Teaching.Pcf.GivingToCustomer\Otus.Teaching.Pcf.GivingToCustomer.WebHost\Otus.Teaching.Pcf.GivingToCustomer.WebHost.csproj", "{D930308C-760B-48B7-875C-33E80BDB1DA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Teaching.Pcf.ReceivingFromPartner.Core", "Otus.Teaching.Pcf.ReceivingFromPartner\Otus.Teaching.Pcf.ReceivingFromPartner.Core\Otus.Teaching.Pcf.ReceivingFromPartner.Core.csproj", "{A4D75929-E8CA-476B-9657-B63E1066CAAF}"
@@ -70,10 +68,6 @@ Global
 		{E321BB56-BCFC-40AF-8605-1422A9DEE016}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E321BB56-BCFC-40AF-8605-1422A9DEE016}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E321BB56-BCFC-40AF-8605-1422A9DEE016}.Release|Any CPU.Build.0 = Release|Any CPU
-		{104F65B5-E1E9-48F0-810C-34A38F316CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{104F65B5-E1E9-48F0-810C-34A38F316CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{104F65B5-E1E9-48F0-810C-34A38F316CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{104F65B5-E1E9-48F0-810C-34A38F316CC2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D930308C-760B-48B7-875C-33E80BDB1DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D930308C-760B-48B7-875C-33E80BDB1DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D930308C-760B-48B7-875C-33E80BDB1DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -111,7 +105,6 @@ Global
 		{20E94F0C-5351-4F49-A9E3-12C8C40120DE} = {F097559C-FEF3-49AE-A893-C9061181CEE2}
 		{66E78D3C-2933-4E30-9EAE-842D23BC8078} = {F097559C-FEF3-49AE-A893-C9061181CEE2}
 		{E321BB56-BCFC-40AF-8605-1422A9DEE016} = {F097559C-FEF3-49AE-A893-C9061181CEE2}
-		{104F65B5-E1E9-48F0-810C-34A38F316CC2} = {F097559C-FEF3-49AE-A893-C9061181CEE2}
 		{D930308C-760B-48B7-875C-33E80BDB1DA8} = {F097559C-FEF3-49AE-A893-C9061181CEE2}
 		{A4D75929-E8CA-476B-9657-B63E1066CAAF} = {45AAAE31-1D5D-400B-ADAA-DE16D7B95BD5}
 		{51BFC6F3-0258-47FE-93AF-744F5B2549D5} = {45AAAE31-1D5D-400B-ADAA-DE16D7B95BD5}

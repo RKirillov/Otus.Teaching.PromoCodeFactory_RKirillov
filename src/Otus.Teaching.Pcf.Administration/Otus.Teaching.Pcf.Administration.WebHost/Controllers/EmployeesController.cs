@@ -47,6 +47,7 @@ namespace Otus.Teaching.Pcf.Administration.WebHost.Controllers
         /// <summary>
         /// Получить данные сотрудника по id
         /// </summary>
+        /// <param name="id">Id сотрудника, например <example>451533d5-d8d5-4a11-9c7b-eb9f14e1a32f</example></param>
         /// <returns></returns>
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<EmployeeResponse>> GetEmployeeByIdAsync(Guid id)
@@ -76,17 +77,18 @@ namespace Otus.Teaching.Pcf.Administration.WebHost.Controllers
         /// <summary>
         /// Обновить количество выданных промокодов
         /// </summary>
+        /// <param name="id">Id сотрудника, например <example>451533d5-d8d5-4a11-9c7b-eb9f14e1a32f</example></param>
         /// <returns></returns>
-        [HttpPut("{id:guid}/appliedPromocodesCount")]
-        public async Task<ActionResult<EmployeeResponse>> UpdateAppliedPromocodesCountAsync(Guid id,
-            UpdateAppliedPromocodesCountRequest request)
+        [HttpPost("{id:guid}/appliedPromocodes")]
+        
+        public async Task<IActionResult> UpdateAppliedPromocodesAsync(Guid id)
         {
             var employee = await _employeeRepository.GetByIdAsync(id);
 
             if (employee == null)
                 return NotFound();
 
-            employee.AppliedPromocodesCount = request.AppliedPromocodesCount;
+            employee.AppliedPromocodesCount++;
 
             await _employeeRepository.UpdateAsync(employee);
 

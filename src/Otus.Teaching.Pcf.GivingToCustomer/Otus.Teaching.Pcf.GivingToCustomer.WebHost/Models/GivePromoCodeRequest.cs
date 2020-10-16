@@ -17,7 +17,5 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models
         public string BeginDate { get; set; }
 
         public string EndDate { get; set; }
-        
-        public Guid? PartnerManagerId { get; set; }
     }
 }

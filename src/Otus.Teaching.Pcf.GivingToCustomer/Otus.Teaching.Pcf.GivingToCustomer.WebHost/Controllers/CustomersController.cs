@@ -28,6 +28,10 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Controllers
             _preferenceRepository = preferenceRepository;
         }
         
+        /// <summary>
+        /// Получить список клиентов
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<CustomerShortResponse>>> GetCustomersAsync()
         {
@@ -44,6 +48,11 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Controllers
             return Ok(response);
         }
         
+        /// <summary>
+        /// Получить клиента по id
+        /// </summary>
+        /// <param name="id">Id клиента, например <example>a6c8c6b1-4349-45b0-ab31-244740aaf0f0</example></param>
+        /// <returns></returns>
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<CustomerResponse>> GetCustomerAsync(Guid id)
         {
@@ -54,6 +63,10 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Controllers
             return Ok(response);
         }
         
+        /// <summary>
+        /// Создать нового клиента
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<CustomerResponse>> CreateCustomerAsync(CreateOrEditCustomerRequest request)
         {
@@ -68,6 +81,11 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Controllers
             return CreatedAtAction(nameof(GetCustomerAsync), new {id = customer.Id}, customer.Id);
         }
         
+        /// <summary>
+        /// Обновить клиента
+        /// </summary>
+        /// <param name="id">Id клиента, например <example>a6c8c6b1-4349-45b0-ab31-244740aaf0f0</example></param>
+        /// <param name="request">Данные запроса></param>
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> EditCustomersAsync(Guid id, CreateOrEditCustomerRequest request)
         {
@@ -85,6 +103,10 @@ namespace Otus.Teaching.Pcf.GivingToCustomer.WebHost.Controllers
             return NoContent();
         }
         
+        /// <summary>
+        /// Удалить клиента
+        /// </summary>
+        /// <param name="id">Id клиента, например <example>a6c8c6b1-4349-45b0-ab31-244740aaf0f0</example></param>
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteCustomerAsync(Guid id)
         {

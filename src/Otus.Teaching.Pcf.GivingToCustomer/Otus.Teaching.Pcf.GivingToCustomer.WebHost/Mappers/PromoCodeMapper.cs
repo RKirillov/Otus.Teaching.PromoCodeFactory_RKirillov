@@ -24,8 +24,6 @@ using Otus.Teaching.Pcf.GivingToCustomer.WebHost.Models;
             promocode.Preference = preference;
             promocode.PreferenceId = preference.Id;
 
-            promocode.PartnerManagerId = request.PartnerManagerId;
-
             promocode.Customers = new List<PromoCodeCustomer>();
 
             foreach (var item in customers)

@@ -79,11 +79,27 @@ namespace Otus.Teaching.Pcf.ReceivingFromPartner.DataAccess.Data
                     {
                         Id = Guid.Parse("0691bb24-5fd9-4a52-a11c-34bb8bc9364e"),
                         CreateDate = new DateTime(2020,07,3),
-                        EndDate = new DateTime(2020,9,9),
+                        EndDate = DateTime.Now.AddMonths(1),
                         Limit = 100 
                     }
                 }
             },
+            new Partner()
+            {
+                Id = Guid.Parse("20d2d612-db93-4ed5-86b1-ff2413bca655"),
+                Name = "Промотеатры",
+                IsActive = false,
+                PartnerLimits = new List<PartnerPromoCodeLimit>()
+                {
+                    new PartnerPromoCodeLimit()
+                    {
+                        Id = Guid.Parse("93f3a79d-e9f9-47e6-98bb-1f618db43230"),
+                        CreateDate = new DateTime(2020,09,6),
+                        EndDate = DateTime.Now.AddMonths(1),
+                        Limit = 15 
+                    }
+                }
+            }
         };
     }
 }

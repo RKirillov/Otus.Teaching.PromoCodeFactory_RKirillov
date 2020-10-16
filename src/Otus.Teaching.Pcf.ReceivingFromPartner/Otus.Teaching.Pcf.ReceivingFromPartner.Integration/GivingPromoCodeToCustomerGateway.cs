@@ -21,8 +21,8 @@ namespace Otus.Teaching.Pcf.ReceivingFromPartner.Integration
             var dto = new GivePromoCodeToCustomerDto()
             {
                 PartnerId = promoCode.Partner.Id,
-                BeginDate = promoCode.BeginDate.ToShortTimeString(),
-                EndDate = promoCode.EndDate.ToShortTimeString(),
+                BeginDate = promoCode.BeginDate.ToShortDateString(),
+                EndDate = promoCode.EndDate.ToShortDateString(),
                 PreferenceId = promoCode.PreferenceId,
                 PromoCode = promoCode.Code,
                 ServiceInfo = promoCode.ServiceInfo,
