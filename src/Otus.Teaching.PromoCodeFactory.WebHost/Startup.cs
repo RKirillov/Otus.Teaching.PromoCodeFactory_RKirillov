@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +13,7 @@ using Otus.Teaching.PromoCodeFactory.Core.Abstractions.Repositories;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.Administration;
 using Otus.Teaching.PromoCodeFactory.DataAccess.Data;
 using Otus.Teaching.PromoCodeFactory.DataAccess.Repositories;
+using Otus.Teaching.PromoCodeFactory.WebHost.ModelDTO;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost
 {
@@ -20,10 +23,14 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var executedAssembly = Assembly.GetExecutingAssembly();
+            var config = new MapperConfiguration(cfg => cfg.AddMaps(executedAssembly));
+
             services.AddControllers();
-            services.AddScoped(typeof(IRepository<Employee>), (x) => 
+            services.AddSingleton(_ => config.CreateMapper());
+            services.AddSingleton(typeof(IRepository<Employee>), (x) => 
                 new InMemoryRepository<Employee>(FakeDataFactory.Employees));
-            services.AddScoped(typeof(IRepository<Role>), (x) => 
+            services.AddSingleton(typeof(IRepository<Role>), (x) => 
                 new InMemoryRepository<Role>(FakeDataFactory.Roles));
 
             services.AddOpenApiDocument(options =>
