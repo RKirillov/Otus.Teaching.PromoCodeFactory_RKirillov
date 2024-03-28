@@ -5,7 +5,7 @@ using System;
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Models
 {
     [AutoMap(typeof(Employee), ReverseMap = true)]
-    public class EmployeeShortResponse
+    public class EmployeeShortDto
     {
         public Guid Id { get; set; }
         

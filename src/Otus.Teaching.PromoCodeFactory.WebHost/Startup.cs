@@ -38,6 +38,8 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
                 options.Title = "PromoCode Factory API Doc";
                 options.Version = "1.0";
             });
+            //services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +61,7 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
             });
             
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
