@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -63,20 +64,8 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
             if (employee == null)
                 return NotFound();
 
-            var employeeModel = new EmployeeResponse()
-            {
-                Id = employee.Id,
-                Email = employee.Email,
-                Roles = employee.Roles.Select(x => new RoleItemResponse()
-                {
-                    Name = x.Name,
-                    Description = x.Description
-                }).ToList(),
-                FullName = employee.FullName,
-                AppliedPromocodesCount = employee.AppliedPromocodesCount
-            };
-            var newEmploee = _mapper.Map<EmployeeDto>(employee);
-            return newEmploee;
+            var newEmploeeDto = _mapper.Map<EmployeeDto>(employee);
+            return newEmploeeDto;
         }
 
         /// <summary>
@@ -86,9 +75,9 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         /// <param name="roles">Роли сотрудника</param>
         /// <returns></returns>
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<ActionResult<EmployeeDto>> AddEmployeeByIdAsync([FromBody] EmployeeSaveDto entity, [FromQuery] List<string> roles)
+        public async Task<ActionResult<EmployeeDto>> AddEmployeeAsync([FromBody] EmployeeSaveDto entity, [FromQuery] List<string> roles)
         {
             var newEmploeeDto = _mapper.Map<EmployeeDto>(entity);
             newEmploeeDto.Id = Guid.NewGuid();
@@ -97,14 +86,11 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
             //newEmploee.Roles = (await _rolesRepository.GetAllAsync()).Join(roles, first => first.Name, second => second,(first,second) => first).ToList();
             newEmploee.Roles = (await _rolesRepository.GetAllAsync()).Where(first => roles.Contains(first.Name)).ToList();
             var created = await _employeeRepository.AddAsync(newEmploee);
-
             if (created == default)
             {
                 return Conflict();
             }
-
-
-            return Ok(newEmploeeDto);
+            return Ok(created);
             //return CreatedAtAction(nameof(GetEmployeeByIdAsync),new { id = newEmploee.Id } , newEmploee);
         }
 
@@ -133,8 +119,8 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         /// <param name="entity">Cущность сотрудника</param>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{id}")]
         public async Task<IActionResult> UpdateEmployeeByIdAsync(Guid id, [FromBody] EmployeeSaveDto entity)//Task<ActionResult<EmployeeDto>>
         {
@@ -144,11 +130,10 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
             {
                 return NotFound();
             }
-            var newEmploee = _mapper.Map<EmployeeDto>(entity);
-            newEmploee.Id = id;
-            newEmploee.Roles= employee.Roles;
-            await _employeeRepository.UpdateAsync(_mapper.Map<Employee>(newEmploee));
-            return Ok(newEmploee);
+            var newEmploeeDto = _mapper.Map<EmployeeDto>(entity);
+            newEmploeeDto.Id = id;
+            await _employeeRepository.UpdateAsync(_mapper.Map<Employee>(newEmploeeDto));
+            return Ok(newEmploeeDto);
         }
     }
 }

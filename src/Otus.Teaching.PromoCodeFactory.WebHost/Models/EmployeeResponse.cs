@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using AutoMapper;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.Administration;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Models
 {
+    [AutoMap(typeof(Employee), ReverseMap = true)]
     public class EmployeeResponse
     {
         public Guid Id { get; set; }
