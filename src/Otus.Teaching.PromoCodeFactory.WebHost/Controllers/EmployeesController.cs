@@ -124,7 +124,7 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Route("{id}")]
+        [Route("{id:guid}")]
         public async Task<IActionResult> UpdateEmployeeByIdAsync(Guid id, [FromQuery] List<string> roles, EmployeeSaveDto entity)//Task<ActionResult<EmployeeDto>>
         {
             var employee = await _employeeRepository.GetByIdAsync(id);
