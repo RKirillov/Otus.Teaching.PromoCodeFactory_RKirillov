@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Otus.Teaching.PromoCodeFactory.Core.Abstractions.Repositories;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.Administration;
 using Otus.Teaching.PromoCodeFactory.WebHost.ModelDTO;
-using Otus.Teaching.PromoCodeFactory.WebHost.Models;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
 {
