@@ -18,9 +18,9 @@ namespace Otus.Teaching.PromoCodeFactory.DataAccess.Repositories
             Data = data;
         }
 
-        public Task<List<T>> GetAllAsync()
+        public Task<IEnumerable<T>> GetAllAsync()
         {
-            return Task.FromResult(Data);
+            return Task.FromResult(Data.AsEnumerable<T>());
         }
 
         public Task<T> GetByIdAsync(Guid id)
